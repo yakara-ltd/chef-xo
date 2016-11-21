@@ -1,0 +1,19 @@
+server {
+<%- nginx_directives @directives.sort + @ordered_directives do |line| -%>
+  <%= line %>
+<%- end -%>
+
+<%- if @ssl_redirect -%>
+<%- if @listen_prefix -%>
+  listen <%= @listen_prefix %>80;
+<%- end -%>
+
+  if ($scheme = http) {
+    rewrite ^ https://<%= @directives['server_name'] %><%= ":#{@ssl_redirect}" unless @ssl_redirect == 443 %>$request_uri? redirect;
+  }
+<%- end -%>
+
+  location <%= @directives['try_files'] ? '@xo-server' : '/' %> {
+    proxy_pass <%= @proxy_pass %>;
+  }
+}
