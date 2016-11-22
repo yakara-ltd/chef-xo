@@ -34,6 +34,12 @@ Note that this recipe also calls on the web recipe as the static assets are requ
 #### xo::common
 Common code for the web and server recipes. You should not need to use this.
 
+#### xo::server-auth-\*, xo::server-transport-\*, xo::server-backup-reports
+These recipes install their respective xo-server plugins. They use an `xo_server_plugin` resource that can install any named plugin from npm. If anyone can figure out how to get xo-server to pick up plugins from `NODE_PATH` so that they don't have to be installed into xo-server's `node_modules` directory, please let me know.
+
+#### xo::server-plugins
+This is a shortcut to call all the above xo-server plugin recipes.
+
 Contributing
 ------------
 You know what to do. ;)

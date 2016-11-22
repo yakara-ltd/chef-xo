@@ -18,6 +18,7 @@ suites:
     run_list:
       - recipe[xo-test]
       - recipe[xo]
+      - recipe[xo::server-plugins]
     attributes:
       redisio:
         package_install: true
