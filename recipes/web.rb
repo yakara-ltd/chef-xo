@@ -18,7 +18,7 @@
 # limitations under the License.
 #
 
-# This is used to configure xo-server.
+# This is used to configure nginx.
 node.default['xo']['web']['enabled'] = true
 
 include_recipe 'xo::common'

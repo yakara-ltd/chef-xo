@@ -25,9 +25,6 @@ default['xo']['server']['download_url'] = "https://github.com/vatesfr/xo-server/
 default['xo']['server']['dir'] = '/srv/xo-server'
 default['xo']['server']['data_root'] = '/var/lib/xo-server'
 
-# Set to false by recipe when appropriate.
-default['xo']['server']['mount_web'] = true
-
 # Overridden by recipe when nginx is on the same node.
 default['xo']['server']['socket_stream'] = '0.0.0.0:80'
 default['xo']['server']['socket_group'] = nil
@@ -43,7 +40,9 @@ default['xo']['server']['config'] = {
         'key' => nil
       }
     ],
-    'mounts' => {},
+    'mounts' => {
+      '/' => "#{node['xo']['web']['dir']}/dist"
+    },
     'proxies' => {}
   },
   'httpProxy' => nil,

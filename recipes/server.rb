@@ -24,16 +24,6 @@ extend SELinuxPolicy::Helpers
 use_selinux = self.use_selinux
 include_recipe 'selinux_policy::install' if use_selinux
 
-# Don't mount web when nginx is on this node.
-node.default['xo']['server']['mount_web'] =
-  node['xo']['web']['enabled'] && !node['xo']['nginx']['enabled']
-
-# Configure xo-server accordingly.
-if node['xo']['server']['mount_web']
-  node.default['xo']['server']['config']['http']['mounts']['/'] =
-    "#{node['xo']['web']['dir']}/dist"
-end
-
 # Use UNIX socket when nginx is on this node.
 if node['xo']['nginx']['enabled']
   node.default['xo']['server']['socket_stream'] = '/var/run/xo-server.sock'
@@ -41,6 +31,7 @@ if node['xo']['nginx']['enabled']
 end
 
 include_recipe 'xo::common'
+include_recipe 'xo::web'
 include_recipe 'redisio::install'
 
 xo_server = node['xo']['server']

@@ -67,7 +67,7 @@ template "#{node['nginx']['dir']}/sites-available/xo-server" do
         config['proxy_pass'] ||= "#{protocol}://#{xo_fqdn}#{port}"
       end
 
-      unless xo_server['mount_web']
+      if node['xo']['web']['enabled']
         config['directives']['root'] ||= "#{node['xo']['web']['dir']}/dist"
         config['directives']['try_files'] ||= '$uri @xo-server'
       end

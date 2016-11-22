@@ -29,6 +29,8 @@ Installs and configures nginx to proxy xo-server. This nginx instance may reside
 * Generates a .xo-server.yaml configuration file from attributes.
 * Creates systemd units for the socket and service, and starts them both.
 
+Note that this recipe also calls on the web recipe as the static assets are required by xo-server, even if they are also being served by nginx. If anyone can figure out how to avoid this, please let me know. My attempts resulted in reload loops, 404s, and missing cookies.
+
 #### xo::common
 Common code for the web and server recipes. You should not need to use this.
 

@@ -20,6 +20,7 @@
 
 default['xo']['nginx']['directives']['access_log'] = "#{node['nginx']['log_dir']}/xo-server.access.log"
 default['xo']['nginx']['directives']['client_max_body_size'] = '4g'
+default['xo']['nginx']['directives']['index'] = 'index.html'
 default['xo']['nginx']['directives']['listen'] = '80'
 default['xo']['nginx']['directives']['root'] = nil # See recipe.
 default['xo']['nginx']['directives']['proxy_http_version'] = '1.1'
