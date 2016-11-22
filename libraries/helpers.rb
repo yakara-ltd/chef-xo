@@ -42,6 +42,10 @@ class Chef
             else
               yield "#{key} " + value.join(' ') + ';'
             end
+          when Hash
+            value.each do |k,v|
+              yield "#{key} #{k} #{v};"
+            end
           else
             yield "#{key} #{value};"
           end

@@ -22,7 +22,18 @@ default['xo']['nginx']['directives']['access_log'] = "#{node['nginx']['log_dir']
 default['xo']['nginx']['directives']['client_max_body_size'] = '4g'
 default['xo']['nginx']['directives']['listen'] = '80'
 default['xo']['nginx']['directives']['root'] = nil # See recipe.
+default['xo']['nginx']['directives']['proxy_http_version'] = '1.1'
+default['xo']['nginx']['directives']['proxy_read_timeout'] = 1800
 default['xo']['nginx']['directives']['server_name'] = node['fqdn']
+
+default['xo']['nginx']['directives']['proxy_set_header'] = {
+  'Host' => '$host',
+  'X-Real-IP' => '$remote_addr',
+  'X-Forwarded-For' => '$proxy_add_x_forwarded_for',
+  'X-Forwarded-Proto' => '$scheme',
+  'Connection' => '"upgrade"',
+  'Upgrade'=> '$http_upgrade'
+}
 
 default['xo']['nginx']['enabled'] = false # See recipe.
 default['xo']['nginx']['ordered_directives'] = []
